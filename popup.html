@@ -1,158 +1,161 @@
 <!DOCTYPE html>
 <html dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grok Account Switcher</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      width: 350px;
-      padding: 10px;
-      text-align: right;
-    }
-    
-    h2 {
-      color: #333;
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 24px;
-    }
-    
-    h3 {
-      margin-top: 20px;
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
-    
-    .account-container {
-      margin-bottom: 15px;
-    }
-    
-    .account-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px;
-      margin: 10px 0;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    
-    .account-item:hover {
-      background-color: #f8f8f8;
-    }
-    
-    .account-info {
-      flex: 1;
-    }
-    
-    .account-name {
-      font-weight: bold;
-      font-size: 16px;
-      margin-bottom: 5px;
-    }
-    
-    .last-used {
-      font-size: 12px;
-      color: #666;
-    }
-    
-    .buttons-container {
-      display: flex;
-      gap: 5px;
-    }
-    
-    button {
-      padding: 8px 12px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.2s;
-    }
-    
-    .switch-btn {
-      background-color: #4285f4;
-      color: white;
-    }
-    
-    .switch-btn:hover {
-      background-color: #3367d6;
-    }
-    
-    .delete-btn {
-      background-color: #ea4335;
-      color: white;
-    }
-    
-    .delete-btn:hover {
-      background-color: #d33426;
-    }
-    
-    .add-account {
-      margin-top: 25px;
-      padding-top: 15px;
-      border-top: 1px solid #eee;
-    }
-    
-    input {
-      padding: 10px;
-      margin-bottom: 15px;
-      width: calc(100% - 20px);
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      box-sizing: border-box;
-      font-size: 14px;
-    }
-    
-    .save-btn {
-      background-color: #34a853;
-      color: white;
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-    }
-    
-    .save-btn:hover {
-      background-color: #2d9147;
-    }
-    
-    .status-message {
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 4px;
-      text-align: center;
-      opacity: 1;
-      transition: opacity 0.5s;
-    }
-    
-    .status-success {
-      background-color: #e8f5e9;
-      color: #2e7d32;
-      border: 1px solid #a5d6a7;
-    }
-    
-    .status-error {
-      background-color: #ffebee;
-      color: #c62828;
-      border: 1px solid #ef9a9a;
-    }
-  </style>
-</head>
-<body>
-  <h2>החלפת חשבונות Grok</h2>
-  
-  <div id="statusMessages"></div>
-  <div id="accountsList"></div>
-  
-  <div class="add-account">
-    <h3>הוספת חשבון חדש</h3>
-    <input type="text" id="accountName" placeholder="שם החשבון (לדוגמא: עבודה, אישי)" />
-    <button id="saveCurrentCookies" class="save-btn">שמור עוגיות נוכחיות</button>
-  </div>
-  
-  <script src="popup.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Grok Account Switcher</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                width: 350px;
+                padding: 10px;
+                text-align: right;
+            }
+
+            h2 {
+                color: #333;
+                text-align: center;
+                margin-bottom: 20px;
+                font-size: 24px;
+            }
+
+            h3 {
+                margin-top: 20px;
+                margin-bottom: 10px;
+                font-size: 18px;
+                text-align: center;
+            }
+
+            .account-container {
+                margin-bottom: 15px;
+            }
+
+            .account-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px;
+                margin: 10px 0;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            }
+
+            .account-item:hover {
+                background-color: #f8f8f8;
+            }
+
+            .account-info {
+                flex: 1;
+            }
+
+            .account-name {
+                font-weight: bold;
+                font-size: 16px;
+                margin-bottom: 5px;
+            }
+
+            .last-used {
+                font-size: 12px;
+                color: #666;
+            }
+
+            .buttons-container {
+                display: flex;
+                gap: 5px;
+            }
+
+            button {
+                padding: 8px 12px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background-color 0.2s;
+            }
+
+            .switch-btn {
+                background-color: #4285f4;
+                color: white;
+            }
+
+            .switch-btn:hover {
+                background-color: #3367d6;
+            }
+
+            .delete-btn {
+                background-color: #ea4335;
+                color: white;
+            }
+
+            .delete-btn:hover {
+                background-color: #d33426;
+            }
+
+            .add-account {
+                margin-top: 25px;
+                padding-top: 15px;
+                border-top: 1px solid #eee;
+                text-align: center;
+            }
+
+            input {
+                padding: 10px;
+                margin-bottom: 15px;
+                width: calc(100% - 20px);
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                box-sizing: border-box;
+                font-size: 14px;
+                text-align: center;
+            }
+
+            .save-btn {
+                background-color: #34a853;
+                color: white;
+                width: 100%;
+                padding: 12px;
+                font-size: 16px;
+            }
+
+            .save-btn:hover {
+                background-color: #2d9147;
+            }
+
+            .status-message {
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 4px;
+                text-align: center;
+                opacity: 1;
+                transition: opacity 0.5s;
+            }
+
+            .status-success {
+                background-color: #e8f5e9;
+                color: #2e7d32;
+                border: 1px solid #a5d6a7;
+            }
+
+            .status-error {
+                background-color: #ffebee;
+                color: #c62828;
+                border: 1px solid #ef9a9a;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>החלפת חשבונות Grok</h2>
+
+        <div id="statusMessages"></div>
+        <div id="accountsList"></div>
+
+        <div class="add-account">
+            <h3>הוספת חשבון חדש</h3>
+            <input type="text" id="accountName" placeholder="שם החשבון (לדוגמא: עבודה, אישי)" />
+            <button id="saveCurrentCookies" class="save-btn">שמור עוגיות נוכחיות</button>
+        </div>
+
+        <script src="popup.js"></script>
+    </body>
 </html>

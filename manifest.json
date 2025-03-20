@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Grok Multi-Account Switcher",
+  "name": "Grok Multi-Account Switcher (UnOfficial)",
   "version": "1.0",
   "description": "החלפה מהירה בין חשבונות באתר grok.com",
   "permissions": ["cookies", "storage", "activeTab"],
