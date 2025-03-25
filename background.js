@@ -14,6 +14,21 @@ function updateBadgeFromValue(accountName) {
     }
 }
 
+chrome.webRequest.onCompleted.addListener(
+    (details) => {
+        if (details.method === 'POST') {
+            if ((details.url.includes('/conversations/') && details.url.includes('/responses')) || details.url.includes('/conversations/new')) {
+                chrome.tabs.query({ active: true, url: '*://grok.com/*' }, function (tabs) {
+                    tabs.forEach((tab) => {
+                        chrome.tabs.sendMessage(tab.id, { action: 'refreshLimits' });
+                    });
+                });
+            }
+        }
+    },
+    { urls: ['*://grok.com/rest/*'] }
+);
+
 chrome.runtime.onStartup.addListener(initBadge);
 chrome.runtime.onInstalled.addListener(initBadge);
 chrome.storage.onChanged.addListener((changes, namespace) => {
