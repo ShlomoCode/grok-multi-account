@@ -18,7 +18,7 @@ chrome.webRequest.onCompleted.addListener(
     (details) => {
         if (details.method === 'POST') {
             if ((details.url.includes('/conversations/') && details.url.includes('/responses')) || details.url.includes('/conversations/new')) {
-                chrome.tabs.query({ active: true, url: '*://grok.com/*' }, function (tabs) {
+                chrome.tabs.query({ url: '*://grok.com/*' }, function (tabs) {
                     tabs.forEach((tab) => {
                         chrome.tabs.sendMessage(tab.id, { action: 'refreshLimits' });
                     });
