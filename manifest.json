@@ -1,10 +1,15 @@
 {
   "manifest_version": 3,
   "name": "Grok Multi-Account Switcher",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "החלפה מהירה בין חשבונות באתר grok.com",
   "permissions": ["cookies", "storage", "webRequest"],
-  "host_permissions": ["*://grok.com/*", "*://*.grok.com/*"],
+  "host_permissions": [
+  "*://grok.com/*",
+  "*://*.grok.com/*",
+  "*://*.x.ai/*",
+  "*://accounts.x.ai/*"
+],
   "background": {
     "service_worker": "background.js"
   },
@@ -27,5 +32,6 @@
     "16": "icon.png",
     "48": "icon.png",
     "128": "icon.png"
-  }
+  },
+  "incognito": "split"
 }

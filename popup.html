@@ -122,6 +122,19 @@
                 background-color: #2d9147;
             }
 
+            .add-new-btn {
+                background-color: #34a853;
+                color: white;
+                width: 100%;
+                padding: 12px;
+                font-size: 16px;
+                margin-top: 10px;
+            }
+
+            .add-new-btn:hover {
+                background-color: #2d9147;
+            }
+
             .status-message {
                 padding: 10px;
                 margin: 10px 0;
@@ -150,8 +163,10 @@
         <div id="statusMessages"></div>
         <div id="accountsList"></div>
 
+        <button id="addNewAccount" class="add-new-btn">הוסף חשבון חדש</button>
+
         <div class="add-account">
-            <h3>הוספת חשבון חדש</h3>
+            <h3>שמירת חשבון נוכחי</h3>
             <input type="text" id="accountName" placeholder="שם החשבון (לדוגמא: עבודה, אישי)" />
             <button id="saveCurrentCookies" class="save-btn">שמור עוגיות נוכחיות</button>
         </div>

@@ -232,9 +232,38 @@ function saveAccount() {
     });
 }
 
+async function deleteAllCookies() {
+    const urls = ['https://grok.com', 'https://accounts.x.ai', 'https://x.ai'];
+    let allCookies = (await Promise.all(urls.map((url) => chrome.cookies.getAll({ url })))).flat();
+    for (const cookie of allCookies) {
+        const url = `https://${cookie.domain.replace(/^\./, '')}${cookie.path}`;
+        await chrome.cookies.remove({
+            storeId: cookie.storeId,
+            url,
+            name: cookie.name,
+        });
+    }
+}
+
+async function addNewAccount() {
+    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+    const [currentTab] = tabs;
+    
+    await deleteAllCookies();
+    await chrome.storage.local.set({ activeGrokAccount: null });
+    updateBadge(null);
+
+    if (currentTab?.url?.includes('grok.com')) {
+        await chrome.tabs.update(currentTab.id, { url: 'https://accounts.x.ai/sign-in' });
+    } else {
+        await chrome.tabs.create({ url: 'https://accounts.x.ai/sign-in' });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     loadAccounts();
     document.getElementById('saveCurrentCookies').addEventListener('click', saveAccount);
+    document.getElementById('addNewAccount').addEventListener('click', addNewAccount);
 
     chrome.storage.local.get('activeGrokAccount', ({ activeGrokAccount }) => {
         if (activeGrokAccount) updateBadge(activeGrokAccount);
